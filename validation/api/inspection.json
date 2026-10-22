@@ -1,0 +1,47 @@
+{
+  "reciters": {
+    "status": 200,
+    "url": "https://www.mp3quran.net/api/v3/reciters?language=ar",
+    "bytes": 193212,
+    "keys": [
+      "reciters"
+    ]
+  },
+  "suwar": {
+    "status": 200,
+    "url": "https://www.mp3quran.net/api/v3/suwar?language=ar",
+    "bytes": 12158,
+    "keys": [
+      "suwar"
+    ]
+  },
+  "hadith": {
+    "status": 200,
+    "url": "https://hadeethenc.com/api/v1/hadeeths/one/?language=ar&id=4792",
+    "bytes": 7071,
+    "keys": [
+      "id",
+      "title",
+      "hadeeth",
+      "attribution",
+      "grade",
+      "explanation",
+      "hints",
+      "categories",
+      "translations",
+      "hadeeth_intro",
+      "words_meanings",
+      "reference"
+    ]
+  },
+  "prayer": {
+    "status": 200,
+    "url": "https://api.aladhan.com/v1/timings/22-10-2026?latitude=31.5326&longitude=35.0998&method=3&iso8601=true&timezonestring=Asia%2FHebron",
+    "bytes": 1475,
+    "keys": [
+      "code",
+      "status",
+      "data"
+    ]
+  }
+}

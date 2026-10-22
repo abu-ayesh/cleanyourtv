@@ -30,9 +30,9 @@
   "contentExactMatch": true,
   "sourcesUnchanged": 484,
   "apk": {
-    "bytes": 2530300,
-    "sha256": "f89d347deb10aea2d2d6af4bef4d0a83869edce4e9654c7792c37b03d034b583",
+    "bytes": 2518255,
+    "sha256": "d5813850279b9aa9d45f2dbb32df3f12f7e4a81847b057c0b12e949d22cba2b0",
     "nativeLibraries": 0,
-    "entries": 41
+    "entries": 42
   }
 }

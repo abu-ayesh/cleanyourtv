@@ -71,6 +71,9 @@ public final class GlassDrawable extends Drawable {
   }
 
   @Override
+  public void getOutline(Outline outline){outline.setRoundRect(getBounds(),radius);}
+
+  @Override
   public boolean isStateful() {
     return true;
   }

@@ -9,6 +9,7 @@ import android.provider.Settings;
 import android.view.*;
 import android.widget.*;
 import com.mihrab.tv.R;
+import com.mihrab.tv.BuildConfig;
 import com.mihrab.tv.core.*;
 import com.mihrab.tv.data.*;
 import com.mihrab.tv.launcher.*;
@@ -21,6 +22,8 @@ public final class HomeActivity extends Activity {
   private FrameLayout stage, overlay, modalPanel;
   private WallpaperView wallpaper;
   private HomeSnapshot snapshot;
+  private Instant debugClock;
+  private Instant now(){return debugClock!=null?debugClock:Instant.now();}
   private AppRepository appRepository;
   private List<LaunchableApp> apps = Collections.emptyList();
   private final LinkedHashMap<String, View> controls = new LinkedHashMap<>(),
@@ -62,6 +65,7 @@ public final class HomeActivity extends Activity {
   @Override
   public void onCreate(Bundle state) {
     super.onCreate(state);
+    if(BuildConfig.DEBUG && getIntent().hasExtra("visualEpoch"))debugClock=Instant.ofEpochMilli(getIntent().getLongExtra("visualEpoch",0));
     getWindow()
         .getDecorView()
         .setSystemUiVisibility(
@@ -78,6 +82,7 @@ public final class HomeActivity extends Activity {
     h24 = preferences.getBoolean("h24", false);
     arabic = preferences.getBoolean("arabic", false);
     motion = preferences.getBoolean("motion", true);
+    wallpaper.setMotion(motion);
     if (state != null) {
       savedFocus = state.getString("focus", "nav_home");
       hadithOffset = state.getInt("hadithOffset");
@@ -149,7 +154,7 @@ public final class HomeActivity extends Activity {
     worker.execute(
         () -> {
           try {
-            HomeSnapshot loaded = new LocalHomeRepository(this).load(Instant.now());
+            HomeSnapshot loaded = new LocalHomeRepository(this).load(now());
             main.post(
                 () -> {
                   if (isDestroyed()) return;
@@ -350,7 +355,7 @@ public final class HomeActivity extends Activity {
   }
 
   private void updateClock() {
-    Instant now = Instant.now();
+    Instant now = now();
     String clockValue = HomeClock.clock(now, h24, arabic);
     android.text.SpannableString clockText = new android.text.SpannableString(clockValue);
     if (!h24)
@@ -379,7 +384,7 @@ public final class HomeActivity extends Activity {
   private JSONObject hadith() {
     return snapshot.hadiths.optJSONObject(
         Math.floorMod(
-            HomeClock.dayIndex(Instant.now(), snapshot.hadiths.length()) + hadithOffset,
+            HomeClock.dayIndex(now(), snapshot.hadiths.length()) + hadithOffset,
             snapshot.hadiths.length()));
   }
 
@@ -408,7 +413,7 @@ public final class HomeActivity extends Activity {
 
   private JSONObject verse() {
     return snapshot.verses.optJSONObject(
-        HomeClock.dayIndex(Instant.now(), snapshot.verses.length()));
+        HomeClock.dayIndex(now(), snapshot.verses.length()));
   }
 
   private String verseReference(JSONObject v) {
@@ -478,7 +483,7 @@ public final class HomeActivity extends Activity {
   }
 
   private void updateDaily() {
-    Instant now = Instant.now();
+    Instant now = now();
     String day = HomeClock.local(now).toLocalDate() + ":" + HomeClock.morning(now) + ":" + arabic;
     if (day.equals(lastDay)) return;
     lastDay = day;
@@ -722,8 +727,8 @@ public final class HomeActivity extends Activity {
   private void showDhikr() {
     if (snapshot == null) return;
     showMessage(
-        HomeClock.morning(Instant.now()) ? "أذكار الصباح" : "أذكار المساء",
-        HomeClock.morning(Instant.now())
+        HomeClock.morning(now()) ? "أذكار الصباح" : "أذكار المساء",
+        HomeClock.morning(now())
             ? "اللَّهُمَّ بِكَ أَصْبَحْنَا، وَبِكَ أَمْسَيْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ،"
                 + " وَإِلَيْكَ النُّشُورُ\n\n"
                 + "أبو داود (5068)، الترمذي (3391)"

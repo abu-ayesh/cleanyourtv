@@ -1,6 +1,7 @@
 plugins { id 'com.android.application' }
 
 android {
+    buildFeatures { buildConfig true }
     namespace 'com.mihrab.tv'
     compileSdk 35
     buildToolsVersion '35.0.0'

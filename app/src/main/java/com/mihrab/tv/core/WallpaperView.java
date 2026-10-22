@@ -4,10 +4,18 @@ import android.content.Context;
 import android.graphics.*;
 import android.util.AttributeSet;
 import android.view.View;
+import android.animation.ValueAnimator;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 
 /** Holds one wallpaper and one preblurred map. Decoding happens on the activity worker. */
 public final class WallpaperView extends View {
   private Bitmap wallpaper, glass;
+  private Bitmap previous;
+  private ValueAnimator fade;
+  private float blend=1;
+  private boolean motion=true;
+  public void setMotion(boolean enabled){motion=enabled; if(!enabled && fade!=null)fade.end();}
   private int scene = 5;
   private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG);
   private static final float[] POSITIONS = {.54f, .56f, .55f, .52f, .5f, .54f};
@@ -18,9 +26,18 @@ public final class WallpaperView extends View {
   }
 
   public void setScene(int id, Bitmap image, Bitmap blurred) {
+    if(id==scene && wallpaper!=null)return;
+    if(fade!=null)fade.cancel();
+    previous=wallpaper;
     scene = id;
     wallpaper = image;
     glass = blurred;
+    if(previous!=null && motion){
+      blend=0;fade=ValueAnimator.ofFloat(0,1);fade.setDuration(1400);
+      fade.addUpdateListener(a->{blend=(float)a.getAnimatedValue();invalidate();});
+      fade.addListener(new AnimatorListenerAdapter(){@Override public void onAnimationEnd(Animator a){previous=null;blend=1;}});
+      fade.start();
+    }else {previous=null;blend=1;}
     invalidate();
   }
 
@@ -29,12 +46,19 @@ public final class WallpaperView extends View {
     super.onDraw(canvas);
     canvas.drawColor(Color.rgb(13, 20, 32));
     if (wallpaper == null) return;
+    if(previous!=null){paint.setAlpha(255);drawCover(canvas,previous);}
+    paint.setAlpha(Math.round(blend*255));drawCover(canvas,wallpaper);paint.setAlpha(255);
+    shade(canvas, getWidth(), getHeight(), 0, 0);
+    drawTexture(canvas);
+  }
+
+  private void drawCover(Canvas canvas, Bitmap bitmap){
     float scale =
         Math.max(
-            getWidth() / (float) wallpaper.getWidth(), getHeight() / (float) wallpaper.getHeight());
-    float w = wallpaper.getWidth() * scale, h = wallpaper.getHeight() * scale;
+            getWidth() / (float) bitmap.getWidth(), getHeight() / (float) bitmap.getHeight());
+    float w = bitmap.getWidth() * scale, h = bitmap.getHeight() * scale;
     canvas.drawBitmap(
-        wallpaper,
+        bitmap,
         null,
         new RectF(
             (getWidth() - w) / 2,
@@ -42,7 +66,9 @@ public final class WallpaperView extends View {
             (getWidth() + w) / 2,
             (getHeight() - h) * POSITIONS[scene - 1] + h),
         paint);
-    shade(canvas, getWidth(), getHeight(), 0, 0);
+  }
+
+  private void drawTexture(Canvas canvas){
     float density = getResources().getDisplayMetrics().density;
     for (float x = 0; x < getWidth() * .75f; x += 91 * density) {
       paint.setColor(Color.argb(Math.round(6 * (1 - x / (getWidth() * .75f))), 196, 212, 225));
@@ -50,6 +76,8 @@ public final class WallpaperView extends View {
     }
     paint.setColor(Color.WHITE);
   }
+
+  @Override protected void onDetachedFromWindow(){if(fade!=null)fade.cancel();previous=null;super.onDetachedFromWindow();}
 
   public void drawGlass(Canvas canvas, View owner, float radius, boolean enabled) {
     int width = owner.getWidth(), height = owner.getHeight();
