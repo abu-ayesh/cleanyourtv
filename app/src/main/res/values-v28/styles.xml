@@ -1,0 +1,12 @@
+<resources>
+    <style name="Theme.Mihrab" parent="android:style/Theme.Material.NoActionBar">
+        <item name="android:fontFamily">@font/mihrab_text</item>
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowBackground">#0d1420</item>
+        <item name="android:colorAccent">#d5c5a4</item>
+        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
+    </style>
+</resources>

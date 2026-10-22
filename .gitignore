@@ -19,3 +19,13 @@ traces/
 *.aab
 launcher/hs_err_pid*.log
 launcher/replay_pid*.log
+
+# MIHRAB native application: generated local artifacts and machine settings
+/.tooling/
+/.local/
+/.gradle/
+/build/
+/app/build/
+/local.properties
+/validation/*.log
+/validation/emulator-*.xml

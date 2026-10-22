@@ -1,0 +1,38 @@
+{
+  "tests": [
+    {
+      "name": "com.mihrab.tv.core.FocusNavigatorTest",
+      "tests": "6",
+      "failures": "0",
+      "errors": "0"
+    },
+    {
+      "name": "com.mihrab.tv.data.HomeClockTest",
+      "tests": "5",
+      "failures": "0",
+      "errors": "0"
+    },
+    {
+      "name": "com.mihrab.tv.launcher.AppRepositoryTest",
+      "tests": "2",
+      "failures": "0",
+      "errors": "0"
+    }
+  ],
+  "lint": {
+    "Warning": 85
+  },
+  "runtime": {
+    "environment": "PC emulator: Android 17 / API 37 / x86_64",
+    "resolutions": [
+      "1920x1080",
+      "1280x720"
+    ],
+    "initialFocus": true,
+    "hadithFocusRestored": true,
+    "realAppLaunchAndReturn": "com.google.android.deskclock / Clock",
+    "gallerySixDistinctTiles": true,
+    "dockPageReturn": "Google to Gmail using RIGHT at the page boundary",
+    "tvTested": false
+  }
+}

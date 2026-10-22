@@ -1,3 +1,9 @@
+> **MIHRAB TV Native — Phase 1**
+>
+> المشروع الجديد هو `app/` ويُبنى من الجذر. ابدأ بـ[دليل مِحراب](README_MIHRAB.md) و[تقرير التنفيذ](NATIVE_IMPLEMENTATION_REPORT.md).
+> التعليمات التالية تخص CleanYourTV الموروث. هذه المرحلة بناء واختبار محليان فقط؛ لا تُشغّل سكربتات التثبيت أو تغيير HOME.
+
+---
 <p align="center">
   <a href="https://cleanyour.tv"><img src="https://raw.githubusercontent.com/Gathin23/cleanyourtv/main/docs/banner.png" alt="CleanYourTV. Your TV, minus the ads. Strip the bloatware from any Android TV or Google TV over Wi-Fi and replace the ad-filled home screen with a clean launcher that looks like an Apple TV. No root, no cable, nothing uninstalled, and a one-line restore." width="800"></a>
 </p>

@@ -1,0 +1,26 @@
+<resources>
+    <style name="Theme.Mihrab" parent="android:style/Theme.Material.NoActionBar">
+        <item name="android:fontFamily">@font/mihrab_text</item>
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowBackground">#0d1420</item>
+        <item name="android:colorAccent">#d5c5a4</item>
+    </style>
+    <style name="Text.Mihrab" parent="">
+        <item name="android:textColor">#f3f2ec</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:fontFamily">@font/mihrab_text</item>
+        <item name="android:fontFeatureSettings">kern,liga,ss01</item>
+        <item name="android:gravity">center_vertical|right</item>
+    </style>
+    <style name="Control.Mihrab" parent="Text.Mihrab">
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:defaultFocusHighlightEnabled">false</item>
+        <item name="android:padding">6dp</item>
+    </style>
+</resources>

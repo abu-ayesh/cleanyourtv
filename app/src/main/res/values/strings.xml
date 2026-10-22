@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">مِحراب</string>
+    <string name="demo_prayers">بيانات تجريبية · ليست مواقيت اليوم ↖</string>
+    <string name="no_apps">لا توجد تطبيقات قابلة للتشغيل</string>
+</resources>

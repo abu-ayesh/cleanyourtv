@@ -1,0 +1,38 @@
+{
+  "permissions": [],
+  "categories": [
+    "android.intent.category.LAUNCHER",
+    "android.intent.category.LEANBACK_LAUNCHER"
+  ],
+  "javaFiles": 12,
+  "fonts": {
+    "mihrab_display.ttf": {
+      "bytes": 246644,
+      "glyphs": 1521,
+      "fsType": 0
+    },
+    "mihrab_display_bold.ttf": {
+      "bytes": 247272,
+      "glyphs": 1521,
+      "fsType": 0
+    },
+    "mihrab_text.ttf": {
+      "bytes": 242928,
+      "glyphs": 1521,
+      "fsType": 0
+    },
+    "mihrab_text_bold.ttf": {
+      "bytes": 244868,
+      "glyphs": 1521,
+      "fsType": 0
+    }
+  },
+  "contentExactMatch": true,
+  "sourcesUnchanged": 484,
+  "apk": {
+    "bytes": 2530300,
+    "sha256": "f89d347deb10aea2d2d6af4bef4d0a83869edce4e9654c7792c37b03d034b583",
+    "nativeLibraries": 0,
+    "entries": 41
+  }
+}
